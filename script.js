@@ -6,7 +6,7 @@ let formLista = document.querySelector("#form-lista");
 let limparLista = document.querySelector("#btn-limpar-lista")
 
 //Ao carregar a página
-window.addEventListener("DomContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", () => {
     let listaSalva = JSON.parse(localStorage.getItem("listaDeCompras")) || [];
 
     listaSalva.forEach(item => {
