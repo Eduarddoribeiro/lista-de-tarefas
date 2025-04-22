@@ -12,9 +12,15 @@ window.addEventListener("DOMContentLoaded", () => {
     listaSalva.forEach(item => {
         let novoItem = document.createElement("li");
         novoItem.textContent = item.nome + " - " + item.quantidade + "x (" + item.categoria + ")";
+
+        novoItem.addEventListener("click", () => {
+            novoItem.classList.toggle("comprado");
+        });
+        
         listaItens.appendChild(novoItem);
     });
 });
+
 
 formLista.addEventListener("submit", (e) => {
     e.preventDefault();

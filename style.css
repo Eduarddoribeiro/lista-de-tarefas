@@ -76,3 +76,9 @@ body {
     background-color: #a93226;
   }
   
+  .comprado {
+    text-decoration: line-through;
+    color: gray;
+    opacity: 0.6;
+  }
+  
