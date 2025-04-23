@@ -80,7 +80,7 @@ formLista.addEventListener("submit", (e) => {
     inputPreco.type = "number";
     inputPreco.classList.add("preco-editavel");
     inputPreco.step = "0.01"; // Centavos
-    inputPreco.value = "0.00"; // Inicializa com 0.00
+    inputPreco.value = ""; // Inicializa com 0.00
 
     // Campo de preço ao item
     novoItem.appendChild(inputPreco);
@@ -90,14 +90,24 @@ formLista.addEventListener("submit", (e) => {
 
     // Salvar no LocalStorage
     let lista = JSON.parse(localStorage.getItem("listaDeCompras")) || [];
-    lista.push({
+
+    let novoObjeto = {
         nome: itemNome.value,
         quantidade: itemQuantidade.value,
         categoria: categoriaItem.value,
-        preco: inputPreco.value
-    });
-
+        preco: ""
+    };
+    
+    lista.push(novoObjeto);
     localStorage.setItem("listaDeCompras", JSON.stringify(lista));
+    
+    // Adiciona o listener para atualizar o localStorage ao digitar o preço
+    inputPreco.addEventListener("input", () => {
+        novoObjeto.preco = inputPreco.value;
+        localStorage.setItem("listaDeCompras", JSON.stringify(lista));
+        atualizarTotal();
+    });
+    
 
     // Limpar os campos
     itemNome.value = "";
