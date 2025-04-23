@@ -31,6 +31,11 @@ window.addEventListener("DOMContentLoaded", () => {
         nomeItem.textContent = item.nome + " - " + item.quantidade + "x (" + item.categoria + ")";
         novoItem.appendChild(nomeItem);
 
+        // Adiciona a funcionalidade de riscar o nome ao clicar
+        nomeItem.addEventListener("click", () => {
+            nomeItem.classList.toggle("comprado");
+        });
+
         // Criar o campo de preço editável
         let inputPreco = document.createElement("input");
         inputPreco.type = "number";
@@ -38,24 +43,14 @@ window.addEventListener("DOMContentLoaded", () => {
         inputPreco.step = "0.01"; // Centavos
         inputPreco.value = item.preco;
 
-        // Adicionar o campo de preço ao item
-        novoItem.appendChild(inputPreco);
-
         // Atualiza o total se o preço mudar
         inputPreco.addEventListener("input", () => {
-            // Atualiza o valor no localStorage
             item.preco = inputPreco.value;
             localStorage.setItem("listaDeCompras", JSON.stringify(listaSalva));
-
-            // Recalcular o total
             atualizarTotal();
         });
 
-        // Adiciona a funcionalidade de riscar o nome ao clicar
-        nomeItem.addEventListener("click", () => {
-            nomeItem.classList.toggle("comprado");
-        });
-
+        novoItem.appendChild(inputPreco);
         listaItens.appendChild(novoItem);
     });
 
@@ -75,53 +70,51 @@ formLista.addEventListener("submit", (e) => {
     nomeItem.textContent = itemNome.value + " - " + itemQuantidade.value + "x (" + categoriaItem.value + ")";
     novoItem.appendChild(nomeItem);
 
+    // Adiciona a funcionalidade de riscar o nome ao clicar
+    nomeItem.addEventListener("click", () => {
+        nomeItem.classList.toggle("comprado");
+    });
+
     // Preço
     let inputPreco = document.createElement("input");
     inputPreco.type = "number";
     inputPreco.classList.add("preco-editavel");
-    inputPreco.step = "0.01"; // Centavos
-    inputPreco.value = ""; // Inicializa com 0.00
+    inputPreco.step = "0.01";
+    inputPreco.value = "";
 
-    // Campo de preço ao item
     novoItem.appendChild(inputPreco);
-
-    // Adicionar o item à lista
     listaItens.appendChild(novoItem);
 
     // Salvar no LocalStorage
     let lista = JSON.parse(localStorage.getItem("listaDeCompras")) || [];
-
     let novoObjeto = {
         nome: itemNome.value,
         quantidade: itemQuantidade.value,
         categoria: categoriaItem.value,
         preco: ""
     };
-    
+
     lista.push(novoObjeto);
     localStorage.setItem("listaDeCompras", JSON.stringify(lista));
-    
-    // Adiciona o listener para atualizar o localStorage ao digitar o preço
+
+    // Atualiza o localStorage ao digitar o preço
     inputPreco.addEventListener("input", () => {
         novoObjeto.preco = inputPreco.value;
         localStorage.setItem("listaDeCompras", JSON.stringify(lista));
         atualizarTotal();
     });
-    
 
     // Limpar os campos
     itemNome.value = "";
     itemQuantidade.value = "";
 
-    // Atualizar o total após adicionar o item
+    // Atualizar o total
     atualizarTotal();
 });
 
-// Limpar lista e LocalStorage
+// Limpar lista
 limparLista.addEventListener("click", () => {
     listaItens.innerHTML = "";
     localStorage.removeItem("listaDeCompras");
-
-    // Atualizar o total após limpar
     atualizarTotal();
 });
