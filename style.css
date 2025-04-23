@@ -65,6 +65,7 @@ body {
   #btn-limpar-lista {
     width: 100%;
     padding: 10px;
+    font-size: 16px;
     background-color: #c0392b;
     color: white;
     border: none;
