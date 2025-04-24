@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Poppins", sans-serif;
     background-color: #f4f4f4;
     padding: 20px;
   }
@@ -15,7 +15,7 @@ body {
   
   h1 {
     text-align: center;
-    color: #2c3e50;
+    color: #8a0000;
   }
   
   form {
@@ -36,14 +36,14 @@ body {
   }
   
   form button {
-    background-color: #27ae60;
+    background-color: #069240;
     color: white;
     border: none;
     cursor: pointer;
   }
   
   form button:hover {
-    background-color: #219150;
+    background-color: #05883c;
   }
   
   #lista-itens {
@@ -73,7 +73,7 @@ body {
     cursor: pointer;
   }
   
-  #limpar-lista:hover {
+  #btn-limpar-lista:hover {
     background-color: #a93226;
   }
   
